@@ -1,0 +1,18 @@
+---
+# vars file for appache
+
+appache_httpd_pkg:
+  - httpd
+
+appache_web_serv: httpd
+ 
+
+appache_template: /home/ansible/project/roles/appache/templates/httpd.j2
+  
+
+conf_file:  /etc/httpd/conf.d/appache.conf
+
+web_content1:  /home/ansible/project/roles/appache/files/index1.html
+
+web_content2:  /home/ansible/project/roles/appache/files/index2.html
+

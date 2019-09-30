@@ -1,0 +1,33 @@
+---
+# tasks file for appache
+- name: install httd package in webservers
+  yum:
+    name: "{{ appache_httpd_pkg }}"
+    state: latest
+- name: start service
+  service:
+    name: "{{ appache_web_serv }}"
+    state: started
+    enabled: yes
+
+- name: add templates in webserver conf file
+  template:
+    src: "{{ appache_template }}" 
+    dest: "{{ conf_file }}"
+  notify: restart httpd
+
+- name: add contents in index file
+  copy:
+    src: "{{ web_content1 }}"
+    dest: /var/www/html/index.html
+  when: ansible_hostname== "node1"
+ 
+- name: add contents in 2ndindex file
+  copy:
+    src: "{{ web_content2 }}"
+    dest: /var/www/html/index.html
+  when: ansible_hostname== "node2"
+
+
+
+
